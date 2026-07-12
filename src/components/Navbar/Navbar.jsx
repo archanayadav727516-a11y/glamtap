@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa";
 
 function Navbar() {
