@@ -2,53 +2,80 @@ import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 function Footer() {
   return (
-    <footer className="bg-[#c00072] text-white mt-8">
+    <footer className="bg-pink-100 text-gray-900 mt-8">
       {/* Top Section */}
-      <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {/* Need Help */}
-        <div>
-          <h3 className="text-2xl font-bold mb-4">Need Help?</h3>
+        <div className="text-center sm:text-left">
+          <h3 className="text-xl sm:text-2xl font-bold mb-4">
+            Need Help?
+          </h3>
 
-          <p className="text-lg mb-2">
+          <p className="text-base sm:text-lg mb-2 break-all">
             Email : hr@glamtap.in
           </p>
 
-          <p className="text-lg">
+          <p className="text-base sm:text-lg">
             Phone : +91 7428676879
           </p>
         </div>
 
         {/* Quick Links */}
-        <div>
-          <h3 className="text-2xl font-bold mb-4">Quick Links</h3>
+        <div className="text-center sm:text-left">
+          <h3 className="text-xl sm:text-2xl font-bold mb-4">
+            Quick Links
+          </h3>
 
-          <ul className="space-y-3 text-lg">
-            <li><a href="#" className="hover:underline">About us</a></li>
-            <li><a href="#" className="hover:underline">Privacy Policy</a></li>
-            <li><a href="#" className="hover:underline">Refund & Cancellation</a></li>
-            <li><a href="#" className="hover:underline">Terms & Conditions</a></li>
-            <li><a href="#" className="hover:underline">Support</a></li>
+          <ul className="space-y-2 text-base sm:text-lg">
+            <li>
+              <a href="#" className="hover:underline">
+                About us
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="hover:underline">
+                Privacy Policy
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="hover:underline">
+                Refund & Cancellation
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="hover:underline">
+                Terms & Conditions
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="hover:underline">
+                Support
+              </a>
+            </li>
           </ul>
         </div>
 
         {/* Professionals */}
-        <div>
-          <h3 className="text-2xl font-bold mb-4">
+        <div className="text-center sm:text-left">
+          <h3 className="text-xl sm:text-2xl font-bold mb-4">
             For Professionals
           </h3>
 
           <a
             href="#"
-            className="text-lg underline hover:text-pink-200"
+            className="text-base sm:text-lg underline hover:text-pink-200"
           >
-            Register as a professional
+            Register as a Professional
           </a>
         </div>
       </div>
 
       {/* Social Icons */}
-      <div className="flex justify-center gap-6 pb-6 text-2xl">
+      <div className="flex justify-center gap-5 sm:gap-6 pb-6 text-3xl">
         <a href="#">
           <FaFacebook className="hover:scale-110 duration-300" />
         </a>
@@ -59,8 +86,8 @@ function Footer() {
       </div>
 
       {/* Bottom */}
-      <div className="border-t border-pink-500 py-4 text-center text-sm text-pink-100">
-        © 2026, Glow Metro All Rights Reserved
+      <div className="border-t border-pink-500 py-4 px-4 text-center text-xs sm:text-sm text-pink-100">
+        © 2026, Glow Metro. All Rights Reserved.
       </div>
 
       {/* WhatsApp */}
@@ -68,9 +95,9 @@ function Footer() {
         href="https://wa.me/917428676879"
         target="_blank"
         rel="noreferrer"
-        className="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-lg hover:scale-110 duration-300"
+        className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-green-500 flex items-center justify-center shadow-lg hover:scale-110 duration-300 z-50"
       >
-        <FaWhatsapp className="text-white text-3xl" />
+        <FaWhatsapp className="text-white text-2xl sm:text-3xl" />
       </a>
     </footer>
   );

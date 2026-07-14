@@ -27,16 +27,16 @@ function Testimonials() {
   ];
 
   return (
-    <section className="bg-[#FCEEE7] rounded-3xl py-8 px-5">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-8">
+    <section className="bg-pink-100 rounded-2xl lg:rounded-3xl py-8 sm:py-10 md:py-12 lg:py-16 px-4 sm:px-6">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center text-gray-900 mb-6 sm:mb-8 lg:mb-12">
         Why Choose Glam Tap?
       </h2>
 
-      <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
         {features.map((item, index) => (
           <div
             key={index}
-            className="relative h-44 md:h-48 overflow-hidden rounded-3xl group cursor-pointer"
+            className="relative h-36 sm:h-44 md:h-48 lg:h-56 overflow-hidden rounded-2xl lg:rounded-3xl group cursor-pointer"
           >
             <img
               src={item.image}
@@ -48,8 +48,8 @@ function Testimonials() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
             {/* Text */}
-            <div className="absolute bottom-4 left-0 right-0 px-4 text-center">
-              <h3 className="text-white text-xl md:text-2xl font-semibold whitespace-pre-line">
+            <div className="absolute bottom-3 sm:bottom-4 left-0 right-0 px-3 sm:px-4 text-center">
+              <h3 className="text-white text-sm sm:text-lg md:text-xl lg:text-2xl font-semibold whitespace-pre-line">
                 {item.title}
               </h3>
             </div>

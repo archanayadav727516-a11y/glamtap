@@ -1,15 +1,15 @@
 function Offers() {
   const brands = [
-    "/images/elan_guckar.png",
-    "/images/loreal_hvqazp.png",
-    "/images/o3_blhnri.png",
-    "/images/rica_uo5ces.png",
-    "/images/seyeon_ofwpfi.png",
-    "/images/shahnaz_ilvanq.png",
+    "/images/Lan.jpg",
+    "/images/Lore.jpg",
+    "/images/O+.webp",
+    "/images/Rich.png",
+    "/images/Sey.png",
+   
   ];
 
   return (
-    <section className="py-16 bg-pink-50 overflow-hidden">
+    <section className="py-16 bg-white-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
         <h2 className="text-5xl font-bold text-black mb-3">
@@ -26,7 +26,7 @@ function Offers() {
             {[...brands, ...brands].map((brand, index) => (
               <div
                 key={index}
-                className="w-80 h-40 bg-pink-50 border border-pink-200 flex items-center justify-center shrink-0 hover:bg-white transition-all duration-300"
+                className="w-80 h-40 bg-white-50 border border-pink-200 flex items-center justify-center shrink-0 hover:bg-white transition-all duration-300"
               >
                 <img
                   src={brand}
