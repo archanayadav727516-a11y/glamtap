@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { CartContext } from "../../Context/CartContext";
 
 function Cart() {
@@ -9,89 +10,138 @@ function Cart() {
     removeItem,
   } = useContext(CartContext);
 
-  console.log("🛒 Cart Data:", cart);
-
-  const total = cart.reduce((sum, item) => {
-    return sum + Number(item.price.replace("₹", "")) * item.quantity;
-  }, 0);
+  const total = cart.reduce(
+    (sum, item) => sum + Number(item.price) * item.quantity,
+    0
+  );
 
   return (
-    <div className="max-w-6xl mx-auto py-16 px-6">
-      <h1 className="text-4xl font-bold mb-8">Shopping Cart</h1>
+    <div className="bg-[#f8f5ef] min-h-screen py-12">
+      <div className="max-w-6xl mx-auto px-6">
 
-      {cart.length === 0 ? (
-        <h2>Your cart is empty.</h2>
-      ) : (
-        <>
-          {cart.map((item) => {
-            console.log("Item:", item);
+        {/* Header */}
+        <div className="flex justify-between items-center mb-10">
+          <h1 className="text-5xl font-light">Your cart</h1>
 
-            return (
+          <Link
+            to="/"
+            className="text-green-700 underline hover:text-green-900"
+          >
+            Continue shopping
+          </Link>
+        </div>
+
+        {/* Column Headings */}
+        <div className="hidden md:grid grid-cols-12 text-xs uppercase tracking-widest text-gray-500 border-b pb-4">
+          <div className="col-span-6">Service</div>
+          <div className="col-span-3 text-center">Quantity</div>
+          <div className="col-span-3 text-right">Total</div>
+        </div>
+
+        {cart.length === 0 ? (
+          <div className="text-center py-24">
+            <h2 className="text-3xl font-semibold">
+              Your cart is empty
+            </h2>
+
+            <Link
+              to="/"
+              className="mt-6 inline-block bg-black text-white px-8 py-3 rounded-lg"
+            >
+              Continue Shopping
+            </Link>
+          </div>
+        ) : (
+          <>
+            {cart.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-between items-center border-b py-6"
+                className="grid grid-cols-12 items-center border-b py-8 gap-4"
               >
-                <div>
-                  <h2 className="text-xl font-bold">{item.name}</h2>
-                  <p>{item.price}</p>
+                {/* Service */}
+                <div className="col-span-6 flex gap-4">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-28 h-28 rounded-lg object-cover"
+                  />
 
-                  <div className="flex items-center gap-3 mt-3">
+                  <div>
+                    <p className="text-xs uppercase text-gray-500">
+                      {item.duration}
+                    </p>
+
+                    <h2 className="text-xl font-medium mt-1">
+                      {item.name}
+                    </h2>
+
+                    <p className="mt-2 text-lg font-semibold">
+                      ₹{item.price}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Quantity */}
+                <div className="col-span-3 flex justify-center">
+                  <div className="flex items-center border rounded-xl overflow-hidden">
+
                     <button
-                      onClick={() => {
-                        console.log("➖ Decrease:", item.id);
-                        decreaseQuantity(item.id);
-                      }}
-                      className="px-3 py-1 bg-gray-200 rounded"
+                      onClick={() => decreaseQuantity(item.id)}
+                      className="px-4 py-2 text-xl"
                     >
-                      -
+                      −
                     </button>
 
-                    <span>{item.quantity}</span>
+                    <span className="px-6">
+                      {item.quantity}
+                    </span>
 
                     <button
-                      onClick={() => {
-                        console.log("➕ Increase:", item.id);
-                        increaseQuantity(item.id);
-                      }}
-                      className="px-3 py-1 bg-gray-200 rounded"
+                      onClick={() => increaseQuantity(item.id)}
+                      className="px-4 py-2 text-xl"
                     >
                       +
                     </button>
                   </div>
                 </div>
 
-                <div className="text-right">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-28 rounded mb-3"
-                  />
+                {/* Total */}
+                <div className="col-span-3 text-right">
+                  <p className="text-xl font-semibold">
+                    ₹{item.price * item.quantity}
+                  </p>
 
                   <button
-                    onClick={() => {
-                      console.log("🗑 Remove:", item.id);
-                      removeItem(item.id);
-                    }}
-                    className="text-red-500"
+                    onClick={() => removeItem(item.id)}
+                    className="text-red-500 text-sm mt-3"
                   >
                     Remove
                   </button>
                 </div>
               </div>
-            );
-          })}
+            ))}
 
-          <div className="mt-10 flex justify-between items-center">
-            <h2 className="text-3xl font-bold">
-              Total: ₹{total}
-            </h2>
+            {/* Footer */}
+            <div className="flex justify-between items-center mt-10">
 
-            <button className="bg-pink-500 text-white px-8 py-3 rounded-lg hover:bg-pink-600">
-              Proceed to Checkout
-            </button>
-          </div>
-        </>
-      )}
+              <div>
+                <h2 className="text-2xl font-bold">
+                  Grand Total
+                </h2>
+
+                <p className="text-4xl font-bold mt-2">
+                  ₹{total}
+                </p>
+              </div>
+
+              <button className="bg-black text-white px-10 py-4 rounded-xl text-lg hover:bg-gray-900 transition">
+                Proceed to Checkout
+              </button>
+
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

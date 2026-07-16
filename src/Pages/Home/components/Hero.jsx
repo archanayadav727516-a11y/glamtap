@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function Hero() {
   const images = [
-    "/images/banner1.jpg",
+    "/images/banner1.jpeg",
     "/images/banner2.jpg",
     "/images/banner3.jpg",
     "/images/banner4.jpg",
@@ -31,14 +31,14 @@ function Hero() {
   };
 
   return (
-    <section className="relative w-full h-[120px] sm:h-[250px] md:h-[450px] lg:h-[550px] xl:h-[650px] overflow-hidden">
+    <section className="relative w-full h-[110px] sm:h-[250px] md:h-[350px] lg:h-[450px] xl:h-[550px] overflow-hidden">
       {/* Images */}
       {images.map((image, index) => (
         <img
           key={index}
           src={image}
           alt={`Banner ${index + 1}`}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+          className={`absolute inset-0 w-full h-full  transition-opacity duration-1000 ${
             current === index ? "opacity-100" : "opacity-0"
           }`}
         />

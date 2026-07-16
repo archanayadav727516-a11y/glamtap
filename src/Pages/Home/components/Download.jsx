@@ -44,7 +44,7 @@ function Download() {
             <img
               src="/images/a.webp"
               alt="Download App"
-              className="w-[240px] sm:w-[320px] md:w-[400px] lg:w-[480px] object-contain"
+              className="w-[240px] sm:w-[320px] md:w-[400px] lg:w-[480px] object-contain rounded-[10%]"
             />
           </div>
 

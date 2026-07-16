@@ -5,6 +5,7 @@ function Offers() {
     "/images/O+.webp",
     "/images/Rich.png",
     "/images/Sey.png",
+    "/images/FYC.png"
    
   ];
 

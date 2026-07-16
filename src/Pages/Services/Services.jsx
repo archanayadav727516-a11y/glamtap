@@ -1,17 +1,20 @@
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
 import { CartContext } from "../../Context/CartContext";
-import ServiceCarousel from "../Home/components/ServiceCarousel";
+import ServiceCarousel from "../Home/components/ServiceCarousel"; // ✅ Add this
 import services from "../../data/services";
 
 function Services() {
   const { addToCart } = useContext(CartContext);
   const { category } = useParams();
+  const navigate = useNavigate();
 
   const normalizeCategory = (value = "") =>
     value
       .trim()
       .toLowerCase()
+      .replace(/&/g, "")
       .replace(/[\s-]+/g, "");
 
   const filteredServices = category
@@ -21,6 +24,7 @@ function Services() {
           normalizeCategory(category)
       )
     : services;
+
 
   return (
     <section className="bg-[#f8f5ef] min-h-screen py-6 sm:py-8">
@@ -42,59 +46,80 @@ function Services() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 justify-items-center">
-          {filteredServices.map((service) => (
-            <div
-              key={service.id}
-              className="w-full max-w-[320px] bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col"
-            >
-              <img
-                src={service.image}
-                alt={service.name}
-                className="w-full h-44 sm:h-48 object-cover"
-              />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
+  {filteredServices.map((service) => (
+    <div
+      key={service.id}
+      onClick={() => navigate(`/service/${service.id}`)}
+       className="w-full max-w-[250px] bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition flex flex-col cursor-pointer"
 
-              <div className="p-4 flex flex-col flex-1">
-                <h2 className="text-lg font-semibold leading-6 line-clamp-2 min-h-[52px]">
-                  {service.name}
-                </h2>
+    >
+      {/* Image */}
+      <img
+        src={service.image}
+        alt={service.name}
+          className="w-full h-32 object-cover"
+      />
 
-                <p className="text-xs uppercase tracking-wider text-gray-500 mt-2">
-                  {service.duration}
-                </p>
+      {/* Content */}
+       <div className="p-2 flex flex-col flex-1">
 
-                <p className="text-sm text-gray-700 mt-3 line-clamp-2 min-h-[42px]">
-                  {service.description}
-                </p>
+        {/* Name */}
+        <h2 className="text-[15px] font-semibold leading-5 h-10 overflow-hidden">
+          {service.name}
+        </h2>
 
-                <div className="flex items-center flex-wrap gap-2 mt-4">
-                  <span className="text-sm text-gray-400 line-through">
-                    ₹{service.oldPrice}
-                  </span>
+        {/* Duration */}
+        <p className="text-[11px] uppercase text-gray-500 mt-1">
+          {service.duration}
+        </p>
 
-                  <span className="text-2xl font-bold">
-                    ₹{service.price}
-                  </span>
+        {/* Description */}
+        <p className="text-[13px] text-gray-700 mt-1 h-10 overflow-hidden">
+          {service.description || "\u00A0"}
+        </p>
 
-                  <span className="text-xs font-semibold text-pink-600">
-                    {service.discount}% OFF
-                  </span>
-                </div>
+        {/* Price */}
+       <div className="flex items-center gap-2 mt-2">
+  <span className="text-xs text-gray-400 line-through">
+    ₹{service.oldPrice}
+  </span>
 
-                <p className="text-sm text-blue-600 mt-3">
-                  {service.booked} women booked
-                </p>
+  <span className="text-[18px] font-bold">
+    ₹{service.price}
+  </span>
 
-                <button
-                  onClick={() => addToCart(service)}
-                  className="mt-6 w-full h-11 rounded-xl border-2 border-pink-600 text-pink-600 font-semibold hover:bg-pink-600 hover:text-white transition"
-                >
-                  {service.options ? "Choose Options" : "Add to Cart"}
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+  <span className="text-xs text-pink-600 font-semibold">
+    {service.discount}% OFF
+  </span>
+</div>
+
+        {/* Booked */}
+       <p className="text-xs text-blue-600 mt-1">
+
+          {service.booked} women booked
+        </p>
+
+        {/* Button */}
+        <button
+  onClick={(e) => {
+    e.stopPropagation();
+
+    if (service.options) {
+      navigate(`/service/${service.id}`);
+    } else {
+      addToCart(service);
+    }
+  }}
+  className="mt-3 w-full h-10 rounded-lg border border-pink-500 text-pink-600 font-medium"
+>
+  {service.options ? "Choose Options" : "Add to Cart"}
+</button>
+
+      </div>
+    </div>
+  ))}
+</div>
 
         {/* Empty State */}
         {filteredServices.length === 0 && (

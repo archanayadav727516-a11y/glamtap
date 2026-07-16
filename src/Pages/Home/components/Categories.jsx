@@ -4,8 +4,8 @@ function Categories() {
   const navigate = useNavigate();
 
   const categories = [
-    { id: 1, name: "Waxing", video: "/video/wax.mp4" },
-    { id: 2, name: "CleanUp", video: "/video/clean.mp4" },
+    { id: 1, name: "Waxing", video: "/video/waxing.mp4" },
+    { id: 2, name: "CleanUp", video: "/video/cleanup.mp4" },
     { id: 3, name: "Hair", video: "/video/hair.mp4" },
     { id: 4, name: "Threading", video: "/video/threading.mp4" },
   ];
