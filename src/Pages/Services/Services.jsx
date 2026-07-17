@@ -1,29 +1,45 @@
-import { useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-
+import { useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import ServiceCarousel from "../Home/components/ServiceCarousel";
+import { ShieldCheck, BadgeCheck, Package } from "lucide-react";
 import { CartContext } from "../../Context/CartContext";
-import ServiceCarousel from "../Home/components/ServiceCarousel"; // ✅ Add this
 import services from "../../data/services";
 
 function Services() {
   const { addToCart } = useContext(CartContext);
   const { category } = useParams();
-  const navigate = useNavigate();
+  
+const navigate = useNavigate();
+  console.log("Route:", category);
 
-  const normalizeCategory = (value = "") =>
-    value
-      .trim()
-      .toLowerCase()
-      .replace(/&/g, "")
-      .replace(/[\s-]+/g, "");
+ const normalizeCategory = (value = "") =>
+  value
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, "")        // <-- and ki jagah remove
+    .replace(/[^a-z0-9]/g, "");
 
-  const filteredServices = category
-    ? services.filter(
-        (service) =>
-          normalizeCategory(service.category) ===
-          normalizeCategory(category)
-      )
-    : services;
+  console.log("Normalized:", normalizeCategory(category));
+
+ const filteredServices = category
+  ? services.filter((service) => {
+      const serviceCategory = normalizeCategory(service.category);
+      const routeCategory = normalizeCategory(category);
+
+      console.log(
+        "Service:",
+        service.category,
+        "=>",
+        serviceCategory,
+        "| Route:",
+        routeCategory
+      );
+
+      return serviceCategory === routeCategory;
+    })
+  : services;
+
+console.log("Filtered Services:", filteredServices);
 
 
   return (
@@ -80,17 +96,33 @@ function Services() {
         </p>
 
         {/* Price */}
-       <div className="flex items-center gap-2 mt-2">
-  <span className="text-xs text-gray-400 line-through">
-    ₹{service.oldPrice}
+      {/* Price */}
+<div className="flex items-center gap-2 mt-2">
+  <span className="line-through text-gray-500 text-sm">
+    ₹
+    {service.options
+      ? service.prices?.Honey?.oldPrice ?? 0
+      : service.oldPrice}
   </span>
 
-  <span className="text-[18px] font-bold">
-    ₹{service.price}
+  <span className="text-lg font-bold">
+    ₹
+    {service.options
+      ? service.prices?.Honey?.price ?? 0
+      : service.price}
   </span>
 
-  <span className="text-xs text-pink-600 font-semibold">
-    {service.discount}% OFF
+  <span className="text-pink-600 text-sm font-medium">
+    {service.options
+      ? Math.round(
+          (
+            ((service.prices?.Honey?.oldPrice ?? 0) -
+              (service.prices?.Honey?.price ?? 0)) /
+            (service.prices?.Honey?.oldPrice ?? 1)
+          ) * 100
+        )
+      : service.discount}
+    % OFF
   </span>
 </div>
 

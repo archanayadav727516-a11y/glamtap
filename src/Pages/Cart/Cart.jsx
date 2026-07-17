@@ -55,30 +55,48 @@ function Cart() {
           <>
             {cart.map((item) => (
               <div
-                key={item.id}
+                key={`${item.id}-${item.waxType || "default"}`}
                 className="grid grid-cols-12 items-center border-b py-8 gap-4"
               >
                 {/* Service */}
-                <div className="col-span-6 flex gap-4">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-28 h-28 rounded-lg object-cover"
-                  />
+                <div className="col-span-6">
+  <p className="text-xs uppercase text-gray-500">
+    {item.duration}
+  </p>
 
-                  <div>
-                    <p className="text-xs uppercase text-gray-500">
-                      {item.duration}
-                    </p>
+  <h2 className="text-xl font-medium mt-1">
+    {item.name}
+  </h2>
 
-                    <h2 className="text-xl font-medium mt-1">
-                      {item.name}
-                    </h2>
+  {item.waxType && (
+    <p className="text-sm text-gray-500 mt-1">
+      Select type of wax:
+      <span className="font-medium"> {item.waxType}</span>
+    </p>
+  )}
 
-                    <p className="mt-2 text-lg font-semibold">
-                      ₹{item.price}
-                    </p>
-                  </div>
+  <div className="flex items-center gap-2 mt-2">
+    <span className="text-lg font-bold">
+      ₹{item.price}
+    </span>
+
+    {item.oldPrice && (
+      <span className="line-through text-gray-400">
+        ₹{item.oldPrice}
+      </span>
+    )}
+
+    {item.oldPrice && (
+      <span className="text-pink-600 text-sm">
+        {Math.round(
+          ((item.oldPrice - item.price) / item.oldPrice) * 100
+        )}
+        % OFF
+      </span>
+    )}
+  </div>
+
+
                 </div>
 
                 {/* Quantity */}
@@ -86,7 +104,7 @@ function Cart() {
                   <div className="flex items-center border rounded-xl overflow-hidden">
 
                     <button
-                      onClick={() => decreaseQuantity(item.id)}
+                     onClick={() => decreaseQuantity(item.id, item.waxType)}
                       className="px-4 py-2 text-xl"
                     >
                       −
@@ -97,7 +115,7 @@ function Cart() {
                     </span>
 
                     <button
-                      onClick={() => increaseQuantity(item.id)}
+                      onClick={() => increaseQuantity(item.id, item.waxType)}
                       className="px-4 py-2 text-xl"
                     >
                       +
@@ -112,7 +130,7 @@ function Cart() {
                   </p>
 
                   <button
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => removeItem(item.id, item.waxType)}
                     className="text-red-500 text-sm mt-3"
                   >
                     Remove

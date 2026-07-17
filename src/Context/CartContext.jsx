@@ -7,43 +7,57 @@ function CartProvider({ children }) {
   const [showPopup, setShowPopup] = useState(false);
   const [lastAddedItem, setLastAddedItem] = useState(null);
 
+  // Add To Cart
   const addToCart = (service) => {
-    // Show popup
     setShowPopup(true);
     setLastAddedItem(service);
 
     setCart((prevCart) => {
       const existingItem = prevCart.find(
-        (item) => item.id === service.id
+        (item) =>
+          item.id === service.id &&
+          item.waxType === service.waxType
       );
 
       if (existingItem) {
         return prevCart.map((item) =>
-          item.id === service.id
-            ? { ...item, quantity: item.quantity + 1 }
+          item.id === service.id &&
+          item.waxType === service.waxType
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+              }
             : item
         );
       }
 
-      return [...prevCart, { ...service, quantity: 1 }];
+      return [
+        ...prevCart,
+        {
+          ...service,
+          quantity: 1,
+        },
+      ];
     });
   };
 
-  const increaseQuantity = (id) => {
+  // Increase Quantity
+  const increaseQuantity = (id, waxType) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === id
+        item.id === id && item.waxType === waxType
           ? { ...item, quantity: item.quantity + 1 }
           : item
       )
     );
   };
 
-  const decreaseQuantity = (id) => {
+  // Decrease Quantity
+  const decreaseQuantity = (id, waxType) => {
     setCart((prevCart) =>
       prevCart
         .map((item) =>
-          item.id === id
+          item.id === id && item.waxType === waxType
             ? { ...item, quantity: item.quantity - 1 }
             : item
         )
@@ -51,9 +65,13 @@ function CartProvider({ children }) {
     );
   };
 
-  const removeItem = (id) => {
+  // Remove Item
+  const removeItem = (id, waxType) => {
     setCart((prevCart) =>
-      prevCart.filter((item) => item.id !== id)
+      prevCart.filter(
+        (item) =>
+          !(item.id === id && item.waxType === waxType)
+      )
     );
   };
 

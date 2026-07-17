@@ -1,104 +1,102 @@
-import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaGooglePlay,
+  FaApple,
+} from "react-icons/fa";
 
 function Footer() {
   return (
-    <footer className="bg-pink-100 text-gray-900 mt-8">
-      {/* Top Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {/* Need Help */}
-        <div className="text-center sm:text-left">
-          <h3 className="text-xl sm:text-2xl font-bold mb-4">
-            Need Help?
-          </h3>
+    <footer className="bg-gradient-to-b from-pink-400 to-pink-600 text-white mt-10">
+      {/* Main */}
+      <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-10">
 
-          <p className="text-base sm:text-lg mb-2 break-all">
-            Email : hr@glamtap.in
-          </p>
+        {/* Company */}
+        <div>
+          <h2 className="text-3xl font-serif mb-6">Company</h2>
 
-          <p className="text-base sm:text-lg">
-            Phone : +91 7428676879
-          </p>
-        </div>
-
-        {/* Quick Links */}
-        <div className="text-center sm:text-left">
-          <h3 className="text-xl sm:text-2xl font-bold mb-4">
-            Quick Links
-          </h3>
-
-          <ul className="space-y-2 text-base sm:text-lg">
-            <li>
-              <a href="#" className="hover:underline">
-                About us
-              </a>
-            </li>
-
-            <li>
-              <a href="#" className="hover:underline">
-                Privacy Policy
-              </a>
-            </li>
-
-            <li>
-              <a href="#" className="hover:underline">
-                Refund & Cancellation
-              </a>
-            </li>
-
-            <li>
-              <a href="#" className="hover:underline">
-                Terms & Conditions
-              </a>
-            </li>
-
-            <li>
-              <a href="#" className="hover:underline">
-                Support
-              </a>
-            </li>
+          <ul className="space-y-3 text-lg">
+            <li>» Privacy Policy</li>
+            <li>» Terms & Conditions</li>
+            <li>» Payment Policy</li>
+            <li>» Cancellation & Refund Policy</li>
           </ul>
         </div>
 
-        {/* Professionals */}
-        <div className="text-center sm:text-left">
-          <h3 className="text-xl sm:text-2xl font-bold mb-4">
-            For Professionals
+        {/* Logo */}
+        <div className="text-center">
+          <div className="inline-block bg-white rounded-xl px-6 py-3">
+            <h2 className="text-4xl font-serif text-pink-600">
+              GlamTap
+            </h2>
+
+            <p className="text-gray-600">Tap Book Glow</p>
+          </div>
+
+          <p className="mt-8 leading-8 text-lg">
+            GlamTap brings together modern beauty,
+            relaxing spa experiences, and professional
+            grooming under one roof. From everyday
+            self-care to special occasions, we provide
+            high-quality services with attention to
+            hygiene, comfort, and detail.
+          </p>
+        </div>
+
+        {/* Download */}
+        <div>
+          <h2 className="text-3xl font-serif mb-5">
+            Download Our App
+          </h2>
+
+          <div className="flex gap-3 mb-5">
+            <button className="bg-black rounded-lg px-4 py-3 flex items-center gap-2">
+              <FaGooglePlay />
+              Google Play
+            </button>
+
+            <button className="bg-black rounded-lg px-4 py-3 flex items-center gap-2">
+              <FaApple />
+              App Store
+            </button>
+          </div>
+
+          <p className="text-lg">
+            Download the app and enjoy a smoother
+            beauty experience.
+          </p>
+
+          <h3 className="mt-8 mb-4 text-2xl">
+            Show some love on social media
           </h3>
 
-          <a
-            href="#"
-            className="text-base sm:text-lg underline hover:text-pink-200"
-          >
-            Register as a Professional
-          </a>
+          <div className="flex gap-5 text-2xl">
+            <FaFacebookF className="cursor-pointer hover:scale-110 duration-300" />
+            <FaInstagram className="cursor-pointer hover:scale-110 duration-300" />
+            <FaYoutube className="cursor-pointer hover:scale-110 duration-300" />
+          </div>
         </div>
       </div>
 
-      {/* Social Icons */}
-      <div className="flex justify-center gap-5 sm:gap-6 pb-6 text-3xl">
-        <a href="#">
-          <FaFacebook className="hover:scale-110 duration-300" />
-        </a>
-
-        <a href="#">
-          <FaInstagram className="hover:scale-110 duration-300" />
-        </a>
-      </div>
-
       {/* Bottom */}
-      <div className="border-t border-pink-500 py-4 px-4 text-center text-xs sm:text-sm text-pink-100">
-        © 2026, Glow Metro. All Rights Reserved.
-      </div>
+      <div className="border-t border-pink-300">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-4">
 
-      {/* WhatsApp */}
-      <a
-        href="https://wa.me/917428676879"
-        target="_blank"
-        rel="noreferrer"
-        className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-green-500 flex items-center justify-center shadow-lg hover:scale-110 duration-300 z-50"
-      >
-        <FaWhatsapp className="text-white text-2xl sm:text-3xl" />
-      </a>
+          <p>
+            Copyright @2026 GlamTap | All rights reserved.
+          </p>
+
+          <div className="flex gap-8">
+            <a href="/">Home</a>
+           
+            <a href="/services">Services</a>
+            
+            <a href="/contact">Contact Us</a>
+             <a href="/cart">Cart</a>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 }

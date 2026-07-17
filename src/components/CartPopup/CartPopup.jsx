@@ -32,7 +32,7 @@ function CartPopup() {
         <img
           src={lastAddedItem.image}
           alt={lastAddedItem.name}
-          className="w-14 h-14 rounded-lg object-cover"
+          className="w-10 h-10 rounded-lg object-cover"
         />
 
         <div>

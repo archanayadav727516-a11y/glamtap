@@ -1,76 +1,107 @@
+
 const services = [
-  {
+   {
     id: 1,
     category: "Waxing",
-    name: "Full Arms & Full Legs + Underarms  ",
+    name: "Full Arms & Full Legs + Underarms",
     duration: "30 MINS",
-    description: "Choose From Honey, Rica or Roll On Wax | under arm peel off",
-    oldPrice: 850,
-    price: 599,
-    discount: 29,
+    description: "Choose From Honey, Rica or Roll On Wax | Underarm Peel Off",
     booked: "4.7k+",
     options: true,
-    image:
-      "/images/wax1.png",
+    image: "/images/wax1.png",
+
+    prices: {
+      Honey: {
+        oldPrice: 850,
+        price: 599,
+      },
+      Rica: {
+        oldPrice: 950,
+        price: 699,
+      },
+      RollOn: {
+        oldPrice: 1100,
+        price: 999,
+      },
+    },
   },
 
   {
     id: 2,
     category: "Waxing",
-    name: "Full arms + Underarms",
+    name: "Full Arms + Underarms",
     duration: "15 MINS",
     description: "Honey or Rica | Underarms Peel Off",
-    oldPrice: 350,
-    price: 299,
-    discount: 14,
     booked: "4.8k+",
     options: true,
-    image:
-      "/images/wax2.webp",
+    image: "/images/wax2.webp",
+
+    prices: {
+      Honey: {
+        oldPrice: 350,
+        price: 299,
+      },
+      Rica: {
+        oldPrice: 450,
+        price: 399,
+      },
+      
+    },
   },
 
   {
     id: 3,
     category: "Waxing",
-    name: "Full Arm & Leg + Underarms Roll on Waxing ",
+    name: "Full Arm & Leg + Underarms Roll On Waxing",
     duration: "45 MINS",
-    description: "Choose from Honey, Rica or Roll-on Waxing",
-    oldPrice: 1200,
-    price: 999,
-    discount: 16,
+    description: "Choose From Honey, Rica or Roll On Waxing",
     booked: "6.1k+",
     options: false,
-    image:
-      "/images/wax3.webp",
+    image: "/images/wax3.webp",
+oldPrice:1200,
+price:900,
+    
   },
+
   {
     id: 4,
     category: "Waxing",
-    name: "Full Body Waxing -Rica",
+    name: "Full Body Waxing - Rica",
     duration: "45 MINS",
-    description: "Choose From Expect Face, Bikini & Butt Area",
+    description: "Choose From Except Face, Bikini & Butt Area",
+    booked: "6.8k+",
+    options: false,
+    image: "/images/wax4.png",
+
     oldPrice: 3000,
     price: 2499,
     discount: 16,
-    booked: "6.8k+",
-     options: false,
-    image:
-      "/images/wax4.png",
   },
 
   {
     id: 5,
     category: "Waxing",
-    name: " Full Leg Waxing",
+    name: "Full Leg Waxing",
     duration: "20 MINS",
     description: "Choose Option Honey or Rica",
-    oldPrice: 350,
-    price: 249,
-    discount: 14,
     booked: "7.2k+",
     options: true,
-    image:
-      "/images/wax5.webp",
+    image: "/images/wax5.webp",
+
+    prices: {
+      Honey: {
+        oldPrice: 350,
+        price: 249,
+      },
+      Rica: {
+        oldPrice: 450,
+        price: 349,
+      },
+      RollOn: {
+        oldPrice: 550,
+        price: 449,
+      },
+    },
   },
 
   {
@@ -79,13 +110,24 @@ const services = [
     name: "Full Back Waxing",
     duration: "20 MINS",
     description: "Cover Area From Shoulder To Pelvis",
-    oldPrice: 400,
-    price: 299,
-    discount: 25,
     booked: "3.9k+",
     options: true,
-    image:
-      "/images/wax6.png",
+    image: "/images/wax6.png",
+
+    prices: {
+      Honey: {
+        oldPrice: 400,
+        price: 299,
+      },
+      Rica: {
+        oldPrice: 500,
+        price: 399,
+      },
+      RollOn: {
+        oldPrice: 600,
+        price: 499,
+      },
+    },
   },
   {
     id: 7,
@@ -118,63 +160,101 @@ const services = [
   },
 
   {
-    id: 9,
-    category: "Waxing",
-    name: " Half Leg Waxing",
-    duration: "15 MINS",
-    description: "Cover Area From Toes To Knees",
-    oldPrice: 350,
-    price: 249,
-    discount: 28,
-    booked: "4.3k+",
-    options: true,
-    image:
-      "/images/wax9.webp",
-  },
-  {
-    id: 10,
-    category: "Waxing",
-    name: " Half Back Waxing",
-    duration: "15 MINS",
-    description: "Choose From Honey, or Rica ",
-    oldPrice: 300,
-    price: 199,
-    discount: 33,
-    booked: "4.5k+",
-    options: true,
-    image:
-      "/images/wax10.png",
-  },
+  id: 9,
+  category: "Waxing",
+  name: "Half Leg Waxing",
+  duration: "15 MINS",
+  description: "Cover Area From Toes To Knees",
+  
+  discount: 28,
+  booked: "4.3k+",
+  options: true,
+  image: "/images/wax9.webp",
+  prices:{
+    Honey:{
+      oldPrice:350,
+      price:249,
+    },
+    Rica:{
+      oldPrice:400,
+      price:399,
+    }
+  }
+},
 
-  {
-    id: 11,
-    category: "Waxing",
-    name: "Half Front Waxing Half Front Waxing",
-    duration: "10 MINS",
-    description: "Face, Bikini & Butt Area",
-    oldPrice: 350,
-    price: 249,
-    discount: 28,
-    booked: "3.6k+",
-    options: true,
-    image:
-      "/images/wax11.png",
-  },
+{
+  id: 10,
+  category: "Waxing",
+  name: "Half Back Waxing",
+  duration: "15 MINS",
+  description: "Choose From Honey or Rica",
+ 
+  discount: 33,
+  booked: "4.5k+",
+  options: true,
+  image: "/images/wax10.png",
+   prices:{
+    Honey:{
+      oldPrice:350,
+      price:249,
+    },
+    Rica:{
+      oldPrice:400,
+      price:399,
+    }
+  }
 
-  {
-    id: 12,
-    category: "Waxing",
-    name: "Butt Waxing Butt Waxing",
-    duration: "10 MINS",
-    description: "Only Covers Buttocks | Bikini Not Included",
-    oldPrice: 250,
-    price: 149,
-    discount: 40,
-    booked: "2.5k+",
-    options: true,
-    image:
-      "/images/wax12.png",
-  },
+
+},
+
+{
+  id: 11,
+  category: "Waxing",
+  name: "Half Front Waxing",
+  duration: "10 MINS",
+  description: "Face, Bikini & Butt Area",
+  
+  discount: 28,
+  booked: "3.6k+",
+  options: true,
+  image: "/images/wax11.png",
+   prices:{
+    Honey:{
+      oldPrice:350,
+      price:249,
+    },
+    Rica:{
+      oldPrice:400,
+      price:399,
+    }
+  }
+
+},
+
+{
+  id: 12,
+  category: "Waxing",
+  name: "Butt Waxing",
+  duration: "10 MINS",
+  description: "Only Covers Buttocks | Bikini Not Included",
+  oldPrice: 250,
+  price: 149,
+  discount: 40,
+  booked: "2.5k+",
+  options: true,
+  image: "/images/wax12.png",
+   prices:{
+    Honey:{
+      oldPrice:250,
+      price:149,
+    },
+    Rica:{
+      oldPrice:400,
+      price:399,
+    }
+  }
+
+},
 
   
 
