@@ -1,5 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import { CartContext } from "../../Context/CartContext";
 
 function Cart() {
@@ -10,10 +12,21 @@ function Cart() {
     removeItem,
   } = useContext(CartContext);
 
+  // Calendar State
+  const [date, setDate] = useState(new Date());
+
+  // Time Slot State
+  const [slot, setSlot] = useState("");
+
+  // Cart Total
   const total = cart.reduce(
     (sum, item) => sum + Number(item.price) * item.quantity,
     0
   );
+// Order Summary
+const subtotal = total;
+const tax = subtotal * 0.1;
+const grandTotal = subtotal + tax;
 
   return (
     <div className="bg-[#f8f5ef] min-h-screen py-12">
@@ -53,110 +66,212 @@ function Cart() {
           </div>
         ) : (
           <>
-            {cart.map((item) => (
-              <div
-                key={`${item.id}-${item.waxType || "default"}`}
-                className="grid grid-cols-12 items-center border-b py-8 gap-4"
-              >
-                {/* Service */}
-                <div className="col-span-6">
-  <p className="text-xs uppercase text-gray-500">
-    {item.duration}
-  </p>
+            <div className="grid lg:grid-cols-3 gap-10 mt-10">
 
-  <h2 className="text-xl font-medium mt-1">
-    {item.name}
-  </h2>
+ 
 
-  {item.waxType && (
-    <p className="text-sm text-gray-500 mt-1">
-      Select type of wax:
-      <span className="font-medium"> {item.waxType}</span>
+    {/* LEFT SIDE */}
+    {/* LEFT SIDE */}
+<div className="lg:col-span-2">
+
+  {cart.map((item) => (
+    <div
+      key={`${item.id}-${item.waxType || "default"}`}
+      className="flex flex-col md:flex-row justify-between gap-6 border-b py-6"
+    >
+      {/* Left Info */}
+      <div className="flex gap-5 flex-1">
+
+        {/* Service Image */}
+        {/* <img
+          src={item.image}
+          alt={item.name}
+          className="w-28 h-28 rounded-xl object-cover border"
+        /> */}
+
+        {/* Service Details */}
+        <div className="flex-1">
+          <p className="text-xs uppercase tracking-wide text-gray-500">
+            {item.duration}
+          </p>
+
+          <h2 className="text-xl font-semibold mt-1">
+            {item.name}
+          </h2>
+
+          {/* Description */}
+          {item.description && (
+            <p className="text-gray-500 text-sm mt-2">
+              {item.description}
+            </p>
+          )}
+
+          {/* Wax Type */}
+          {item.waxType && (
+            <p className="text-sm mt-2">
+              <span className="font-medium">
+                Wax Type:
+              </span>{" "}
+              {item.waxType}
+            </p>
+          )}
+
+          {/* Price */}
+          <div className="flex items-center gap-3 mt-3">
+            <span className="text-xl font-bold text-fuchsia-700">
+              ₹{item.price}
+            </span>
+
+            {item.oldPrice && (
+              <span className="line-through text-gray-400">
+                ₹{item.oldPrice}
+              </span>
+            )}
+
+            {item.oldPrice && (
+              <span className="text-green-600 text-sm font-medium">
+                {Math.round(
+                  ((item.oldPrice - item.price) /
+                    item.oldPrice) *
+                    100
+                )}
+                % OFF
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Right Controls */}
+      <div className="flex flex-col items-end justify-between">
+
+        {/* Quantity */}
+        <div className="flex items-center border rounded-xl overflow-hidden">
+          <button
+            onClick={() =>
+              decreaseQuantity(item.id, item.waxType)
+            }
+            className="px-4 py-2 text-xl hover:bg-gray-100"
+          >
+            −
+          </button>
+
+          <span className="px-6 font-semibold">
+            {item.quantity}
+          </span>
+
+          <button
+            onClick={() =>
+              increaseQuantity(item.id, item.waxType)
+            }
+            className="px-4 py-2 text-xl hover:bg-gray-100"
+          >
+            +
+          </button>
+        </div>
+
+        {/* Total */}
+        <div className="text-right mt-4">
+          <p className="text-xl font-bold">
+            ₹{item.price * item.quantity}
+          </p>
+
+          <button
+            onClick={() =>
+              removeItem(item.id, item.waxType)
+            }
+            className="text-red-500 text-sm mt-2 hover:underline"
+          >
+            Remove
+          </button>
+        </div>
+
+      </div>
+    </div>
+  ))}
+
+</div>
+{/* RIGHT SIDE */}
+<div className="lg:col-span-1">
+  <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-24">
+
+    <div className="flex justify-between mb-3">
+      <span>Subtotal</span>
+      <span>₹{subtotal.toFixed(2)}</span>
+    </div>
+
+    <div className="flex justify-between mb-3">
+      <span>Taxes & Fee (10%)</span>
+      <span>₹{tax.toFixed(2)}</span>
+    </div>
+
+    <hr className="my-4" />
+
+    <div className="flex justify-between text-xl font-bold">
+      <span>Total</span>
+      <span>₹{grandTotal.toFixed(2)}</span>
+    </div>
+
+    <p className="text-center text-sm mt-4 text-gray-500">
+      Have a Coupon? Apply it at Checkout
     </p>
-  )}
 
-  <div className="flex items-center gap-2 mt-2">
-    <span className="text-lg font-bold">
-      ₹{item.price}
-    </span>
+    <div className="border-2 border-green-700 rounded-xl mt-6 p-5 text-center">
+      <h2 className="text-2xl font-bold text-green-700">
+        100% SATISFACTION
+      </h2>
 
-    {item.oldPrice && (
-      <span className="line-through text-gray-400">
-        ₹{item.oldPrice}
-      </span>
-    )}
+      <p className="text-xl text-green-700">
+        GUARANTEED ALWAYS
+      </p>
 
-    {item.oldPrice && (
-      <span className="text-pink-600 text-sm">
-        {Math.round(
-          ((item.oldPrice - item.price) / item.oldPrice) * 100
-        )}
-        % OFF
-      </span>
-    )}
+      <p className="mt-2 text-gray-600">
+        Expert Pros (5+ Years) | Verified Professionals
+      </p>
+    </div>
+
+    <div className="mt-8">
+      <h3 className="font-semibold mb-3">
+        Select Service Date
+      </h3>
+
+      <Calendar
+        value={date}
+        onChange={setDate}
+      />
+    </div>
+
+    <div className="mt-6">
+      <h3 className="font-semibold mb-3">
+        Choose Your Preferred Time Slot
+      </h3>
+
+      <select
+        value={slot}
+        onChange={(e) => setSlot(e.target.value)}
+        className="w-full border rounded-lg p-3"
+      >
+        <option value="">Select an arrival time</option>
+        <option>09:00 AM</option>
+        <option>10:00 AM</option>
+        <option>11:00 AM</option>
+        <option>12:00 PM</option>
+        <option>02:00 PM</option>
+        <option>04:00 PM</option>
+        <option>06:00 PM</option>
+      </select>
+    </div>
+
+    <button className="w-full mt-6 bg-fuchsia-700 hover:bg-fuchsia-800 text-white py-4 rounded-xl">
+      Confirm Slot
+    </button>
+
   </div>
+</div>
 
 
-                </div>
+</div> {/* End Main Grid */}
 
-                {/* Quantity */}
-                <div className="col-span-3 flex justify-center">
-                  <div className="flex items-center border rounded-xl overflow-hidden">
-
-                    <button
-                     onClick={() => decreaseQuantity(item.id, item.waxType)}
-                      className="px-4 py-2 text-xl"
-                    >
-                      −
-                    </button>
-
-                    <span className="px-6">
-                      {item.quantity}
-                    </span>
-
-                    <button
-                      onClick={() => increaseQuantity(item.id, item.waxType)}
-                      className="px-4 py-2 text-xl"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-
-                {/* Total */}
-                <div className="col-span-3 text-right">
-                  <p className="text-xl font-semibold">
-                    ₹{item.price * item.quantity}
-                  </p>
-
-                  <button
-                    onClick={() => removeItem(item.id, item.waxType)}
-                    className="text-red-500 text-sm mt-3"
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            ))}
-
-            {/* Footer */}
-            <div className="flex justify-between items-center mt-10">
-
-              <div>
-                <h2 className="text-2xl font-bold">
-                  Grand Total
-                </h2>
-
-                <p className="text-4xl font-bold mt-2">
-                  ₹{total}
-                </p>
-              </div>
-
-              <button className="bg-black text-white px-10 py-4 rounded-xl text-lg hover:bg-gray-900 transition">
-                Proceed to Checkout
-              </button>
-
-            </div>
           </>
         )}
       </div>
